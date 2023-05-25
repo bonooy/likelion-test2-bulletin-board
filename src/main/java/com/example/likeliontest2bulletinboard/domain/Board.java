@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-@Setter
 public class Board {
 
     @Id
@@ -34,6 +33,13 @@ public class Board {
                 .title(boardDto.getTitle())
                 .content(boardDto.getContent())
                 .build();
+    }
+
+
+    public void setBoard(BoardDto boardDto) {
+        this.title = boardDto.getTitle();
+        this.content = boardDto.getContent();
+
     }
 
 
