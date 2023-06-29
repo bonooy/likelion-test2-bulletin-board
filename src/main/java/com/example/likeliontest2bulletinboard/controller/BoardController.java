@@ -1,6 +1,8 @@
 package com.example.likeliontest2bulletinboard.controller;
 
 import com.example.likeliontest2bulletinboard.dto.BoardDto;
+import com.example.likeliontest2bulletinboard.dto.BoardForOneDto;
+import com.example.likeliontest2bulletinboard.dto.BoardRespDto;
 import com.example.likeliontest2bulletinboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -24,13 +26,13 @@ public class BoardController {
 
     @PostMapping("/create")
     public String create(@RequestBody BoardDto boardDto) {
-        Long savedBoardId = boardService.saveBoard(boardDto);
+        boardService.saveBoard(boardDto);
         return CREATE_BOARD_MESSAGE;
     }
 
     @PatchMapping("/{id}")
     public String update(@PathVariable("id") Long boardId, @RequestBody BoardDto boardDto) {
-        Long savedboard = boardService.updateBoard(boardId, boardDto);
+        boardService.updateBoard(boardId, boardDto);
         return UPDATE_BOARD_MESSAGE;
     }
 
@@ -40,10 +42,14 @@ public class BoardController {
         return DELETE_BOARD_MESSAGE;
     }
 
+    @GetMapping()   // 리스트로 제목과 게시글 번호만 전체 조회
+    public List<BoardRespDto> findAll() {
+        return boardService.findAllBoard();
+    }
 
-
-
-
-
+    @GetMapping("/{id}")    // 개별 조회
+    public BoardForOneDto findOne(@PathVariable("id") Long boardId) {
+        return boardService.findOneBoard(boardId);
+    }
 
 }

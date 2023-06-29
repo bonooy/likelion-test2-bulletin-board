@@ -1,10 +1,11 @@
 package com.example.likeliontest2bulletinboard.domain;
 
 import com.example.likeliontest2bulletinboard.dto.BoardDto;
+import com.example.likeliontest2bulletinboard.dto.BoardForOneDto;
+import com.example.likeliontest2bulletinboard.dto.BoardRespDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -40,6 +41,21 @@ public class Board {
         this.title = boardDto.getTitle();
         this.content = boardDto.getContent();
 
+    }
+
+    public BoardRespDto setBoardRespDto() {
+        return BoardRespDto.builder()
+                .boardId(this.boardId)
+                .title(this.title)
+                .build();
+    }
+
+    public BoardForOneDto setBoardForOneDto() {
+        return BoardForOneDto.builder()
+                .boardId(this.boardId)
+                .title(this.title)
+                .content(this.content)
+                .build();
     }
 
 
